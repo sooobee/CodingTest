@@ -15,7 +15,7 @@ void dfs(int num){
 
     if(visited[num] == true){
         res -= 1;
-        return;
+        return; // dfs 함수 호출한 곳 다음 줄로 가게 됨
     }
 
     visited[num] = true;
@@ -38,7 +38,6 @@ void dfs(int num){
             }
         }
     }
-    return;
 }
 
 int main(){
