@@ -1,58 +1,20 @@
 #include<iostream>
-#include<queue>
-#include<vector>
-#include<algorithm>
 using namespace std;
 
-int n;
-bool visited[1000001];
-int dept[1000001];
-
-void bfs(int n){
-    queue<int> q;
-    
-    q.push(n);
-    visited[n] = true;
-
-    while(!q.empty()){
-        int num = q.front();
-        q.pop();
-
-// -------1, 2, 3 경우를 다 queue에다 넣음
-        if(num % 3 == 0){
-            int nxt = num / 3;
-
-            if(!visited[nxt]){
-                q.push(nxt);
-                visited[nxt] = true;
-                dept[nxt] = dept[num]+1;
-            }
-        }
-
-        if(num % 2 == 0){
-            int nxt = num / 2;
-
-            if(!visited[nxt]){
-                q.push(nxt);
-                visited[nxt] = true;
-                dept[nxt] = dept[num]+1;
-            }
-        }
-
-        if(num-1 > 0 && !visited[num-1]){
-            q.push(num-1);
-            visited[num-1] = true;
-            dept[num-1] = dept[num]+1;
-        }
-    }
-}
+int D[1000001];
 
 int main(){
+    int n;
     cin >> n;
+    D[1] = 0;
 
-    bfs(n);
+    // D[i]: i에서 1로 갈 때 연산을 사용하는 횟수의 최솟값
+    for(int i=2; i<=n; i++){
+        D[i] = D[i-1]+1;
 
-    if(visited[1]) cout << dept[1];
+        if(i % 2 == 0) D[i] = min(D[i], D[i/2]+1);
+        if(i % 3 == 0) D[i] = min(D[i], D[i/3]+1);
+    }
 
-    return 0;
+    cout << D[n];
 }
