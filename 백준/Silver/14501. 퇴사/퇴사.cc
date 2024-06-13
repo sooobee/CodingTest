@@ -7,7 +7,7 @@ int main(){
     int n;
     int T[16] = {0, };
     int P[16] = {0, };
-    int D[18] = {0, };
+    int D[17] = {0, };
     cin >> n;
 
     for(int i=1; i<=n; i++){
