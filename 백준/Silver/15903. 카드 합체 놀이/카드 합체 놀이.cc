@@ -16,7 +16,7 @@ int main(){
     cin >> n >> m;
 
     for(int i=0; i<n; i++){
-        long long int num;
+        int num;
         cin >> num;
         pq.push(num);
     }
