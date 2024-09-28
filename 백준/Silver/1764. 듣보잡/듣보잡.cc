@@ -1,34 +1,33 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
+#include<iostream>
 #include<map>
+#include<vector>
+#include<string>
+#include<algorithm>
 using namespace std;
 
 int main(){
     int N, M;
-    string name;
+    int sum;
+    string str;
     map<string, int> m;
-    vector<string> result;
+    vector<string> res;
     
     cin >> N >> M;
-    
-    int sum = N+M;
+    sum = N + M;
     
     while(sum--){
-        cin >> name;
+        cin >> str;
+        m[str]++;
         
-        m[name]++; // key에 name을 저장하고 나온 횟수를 value로 카운트해줌
-        
-        // name이 2번 이상 나온 경우
-        if(m[name] > 1){
-            result.push_back(name);
+        if(m[str] >= 2){
+            res.push_back(str);
         }
     }
     
-    sort(result.begin(), result.end());
-    cout << result.size() << endl;
+    sort(res.begin(), res.end());
+    cout << res.size() << endl;
     
-    for(int i=0; i< result.size(); i++){
-        cout << result[i] << endl;
+    for(int i=0; i<res.size(); i++){
+        cout << res[i] << endl;
     }
 }
