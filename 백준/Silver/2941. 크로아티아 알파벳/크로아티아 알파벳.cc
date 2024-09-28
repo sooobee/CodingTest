@@ -15,10 +15,10 @@ int main() {
     
     for(int i=0; i<8; i++){
         for(int j=0; j<str.length(); j++){
-            index = str.find(croatia[i]); // 문자의 첫번째 인덱스 값 반환
-            // 같은 문자를 찾았을 경우
+            int index = str.find(croatia[i]);
+            
             if(index != string::npos){
-                str.replace(index, croatia[i].length(), "#"); // 시작주소, 길이, 바꿀 문자
+                str.replace(index, croatia[i].length(), "#");
             }
         }
     }
