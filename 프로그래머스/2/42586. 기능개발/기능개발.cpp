@@ -28,14 +28,14 @@ vector<int> solution(vector<int> progresses, vector<int> speeds) {
     for(int i = 0; i < t.size(); i++){
         // 비어 있을 경우 일단 넣음
         if(t[i] <= max_num){
-                st.push(t[i]);
+
                 cnt++;
         } 
         else { // 더 크면 cnt를 answer에 저장, cnt리셋
             answer.push_back(cnt); 
             cnt = 0;
         
-            st.push(t[i]);
+
             max_num = t[i];
             cnt++;
         }
