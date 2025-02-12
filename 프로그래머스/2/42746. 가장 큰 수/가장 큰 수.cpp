@@ -4,7 +4,7 @@
 #include<algorithm>
 using namespace std;
 
-bool cmp(string a, string b){
+bool cmp(const string &a, const string &b){
     return a + b > b + a;
 }
 
