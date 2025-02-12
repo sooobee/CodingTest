@@ -4,7 +4,7 @@
 #include<algorithm>
 using namespace std;
 
-bool cmp(const string &a, const string &b){
+bool cmp(string a, string b){
     return a + b > b + a;
 }
 
@@ -23,8 +23,7 @@ string solution(vector<int> numbers) {
         answer += v2[i];
     }
     
-    // 
-    if(v2[0] == "0"){
+    if(answer[0] == '0'){
         answer = "0";
     }
     
