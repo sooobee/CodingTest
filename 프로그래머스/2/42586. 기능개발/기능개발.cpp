@@ -1,50 +1,66 @@
 #include <string>
 #include <vector>
 #include <stack>
+#include <queue>
 #include <iostream>
 
 using namespace std;
 
-vector<int> solution(vector<int> progresses, vector<int> speeds) {
+vector<int> solution(vector<int> pro, vector<int> sp) {
     vector<int> answer;
-    vector<int> t;
-    stack<int> st;
+    vector<int> rest; // 완료까지 걸리는 시간을 저장
+    queue<int> q;
     
-    
-    for(int i = 0; i < progresses.size(); i++){
-        int num;
+    for(int i = 0; i < pro.size(); i++){
+        int time;
+        int na = (100 - pro[i]) % sp[i];
         
-        if((100 - progresses[i]) % speeds[i] > 0){
-            num = (100 - progresses[i]) / speeds[i] + 1;
+        // 나머지가 0이 아닌 경우 +1을 해준 값을 rest에 저장
+        if(na != 0){
+            time = (100 - pro[i]) / sp[i] + 1;
+            rest.push_back(time);
         } else {
-            num = (100 - progresses[i]) / speeds[i]; // 남은 시간    
+            time = (100 - pro[i]) / sp[i];
+            rest.push_back(time);
         }
-
-        t.push_back(num);
     }
-    
-    int cnt = 0;
-    int max_num = t[0];
-    for(int i = 0; i < t.size(); i++){
-        // 비어 있을 경우 일단 넣음
-        if(t[i] <= max_num){
 
-                cnt++;
-        } 
-        else { // 더 크면 cnt를 answer에 저장, cnt리셋
-            answer.push_back(cnt); 
-            cnt = 0;
+        for(int i = 0; i < rest.size(); i++){
+            
+            // 진행중인 기능이 없는 경우
+            if(q.empty()){
+                q.push(rest[i]);
+                continue;
+                
+                // 이미 진행 중인 기능이 있는 경우
+            } else { 
+                // 뒷 기능이 앞 기능보다 더 오래 걸리는 경우
+                // 그동안의 기능을 전부 pop
+                // pop한 수를 answer에 저장
+                if(rest[i] > q.front()){
+                    int cnt = 0;
+                    
+                    while(!q.empty()){
+                        q.pop();
+                        cnt++;
+                    }
+                    answer.push_back(cnt);
+                    q.push(rest[i]);
+
+                    
+                } else {
+                    q.push(rest[i]);
+
+                }
+            }
+        }
         
-
-            max_num = t[i];
+        int cnt = 0;
+        while(!q.empty()){
+            q.pop();
             cnt++;
         }
-    }
-
-    
-    if(cnt > 0){
-        answer.push_back(cnt);
-    }
+    answer.push_back(cnt);
     
     return answer;
 }
