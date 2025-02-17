@@ -14,9 +14,8 @@ bool solution(string s)
         else {
             // ')'일 때
             // 스택이 비어있으면 바로 false
-            if(st.empty()){
-                return 0;
-            } else {
+            if(st.empty()) return false;
+            else {
                 // 스택이 비어있지않을 때
                 // '(' 인 경우 pop
                 if(st.top() == '('){
