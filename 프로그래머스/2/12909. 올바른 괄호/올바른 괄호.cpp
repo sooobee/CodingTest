@@ -1,29 +1,36 @@
 #include<string>
 #include<iostream>
-#include<queue>
+#include<stack>
 using namespace std;
 
 bool solution(string s)
 {
     bool answer = false;
-    queue<char> q;
-
-    for(int i=0; i<s.length(); i++){
-        if(s[i] == ')'){
-            if(!q.empty()){
-                q.pop();
+    stack<int> st;
+    
+    for(int i = 0; i < s.length(); i++){
+        // '('일 때는 무조건 push
+        if(s[i] == '(') st.push(s[i]);
+        else {
+            // ')'일 때
+            // 스택이 비어있으면 바로 false
+            if(st.empty()){
+                return 0;
             } else {
-                q.push(s[i]);
-                answer = 0; // )가 가장 많이 들어오는 경우 바로 false
-                break;
+                // 스택이 비어있지않을 때
+                // '(' 인 경우 pop
+                if(st.top() == '('){
+                    st.pop();
+                } else {
+                    st.push(s[i]);
+                }
             }
-        }else {
-            q.push(s[i]);
         }
     }
-
-    if(q.empty()) answer = 1;
-
-
+    
+    if(st.empty()){
+        answer = true;
+    }
+    
     return answer;
 }
