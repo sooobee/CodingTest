@@ -4,28 +4,27 @@
 #include<algorithm>
 using namespace std;
 
-bool cmp(const string &a, const string &b){
-    return a + b > b + a;
-}
+bool cmp(string a, string b){
 
+    return a + b > b + a;
+
+}
 string solution(vector<int> numbers) {
-    vector<string> v2;
+    vector<string> num;
     string answer = "";
     
     for(int i = 0; i < numbers.size(); i++){
-        v2.push_back(to_string(numbers[i]));
+        num.push_back(to_string(numbers[i]));
     }
     
-    sort(v2.begin(), v2.end(), cmp);
+    sort(num.begin(), num.end(), cmp);
     
-    for(int i = 0; i < v2.size(); i++){
-        // cout << v2[i] << " ";
-        answer += v2[i];
+    for(int i = 0; i < num.size(); i++){
+        answer += num[i];
     }
     
     if(answer[0] == '0'){
         answer = "0";
     }
-    
     return answer;  
 }
