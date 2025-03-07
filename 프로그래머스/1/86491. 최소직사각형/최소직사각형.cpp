@@ -11,17 +11,8 @@ int solution(vector<vector<int>> sizes) {
     int h_max = 0;
     
     for(int i = 0; i < sizes.size(); i++){
-        
-        // 가로가 더 길게 배치
-        if(sizes[i][0] < sizes[i][1]){
-            int tmp;
-            tmp = sizes[i][0];
-            sizes[i][0] = sizes[i][1];
-            sizes[i][1] = tmp;
-        }
-        
-        if(sizes[i][0] > w_max) w_max = sizes[i][0];
-        if(sizes[i][1] > h_max) h_max = sizes[i][1];
+        w_max = max(w_max, max(sizes[i][0], sizes[i][1]));
+        h_max = max(h_max, min(sizes[i][0], sizes[i][1]));
         
     }
     
