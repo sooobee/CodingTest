@@ -7,24 +7,37 @@
 using namespace std;
 
 vector<int> solution(vector<int> answers) {
-    vector<int> answer;
-    vector<vector<int>> math = {{1, 2, 3, 4, 5}, {2, 1, 2, 3, 2, 4, 2, 5}, {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}};
-    vector<int> cnt = {0, 0, 0};
+    vector<int> winner;
+    int size = answers.size();
+    int first[5] = {1, 2, 3, 4, 5};
+    int sec[8] = {2, 1, 2, 3, 2, 4, 2, 5};
+    int third[10] = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+    vector<int> cnt(3);
+    int sc = 0;
+    int tc = 0;
     
-    for(int i = 0; i < answers.size(); i++){
-        if(answers[i] == math[0][i % math[0].size()]) cnt[0]++;
-        if(answers[i] == math[1][i % math[1].size()]) cnt[1]++;
-        if(answers[i] == math[2][i % math[2].size()]) cnt[2]++;
+    for(int i = 0; i < size; i++){
+        if(answers[i] == first[i % 5]) cnt[0]++;
+        if(answers[i] == sec[i % 8]) cnt[1]++;
+        if(answers[i] == third[i % 10]) cnt[2]++;
     }
-    
-    int m = *max_element(cnt.begin(), cnt.end());
-    
-    if(m == cnt[0]) answer.push_back(1);
-    if(m == cnt[1]) answer.push_back(2);
-    if(m == cnt[2]) answer.push_back(3);
-    
-    if(answer.size() > 1){
-        sort(answer.begin(), answer.end());
+    cout << cnt[0] << " " << cnt[1] << " " << cnt[2] << endl;
+    // max 뽑음
+    int max = 0;
+    for(int i = 0; i < 3; i++){
+        if(cnt[i] >= max){
+            max = cnt[i];
+        }
+        
     }
-    return answer;
+    cout << max << " ";
+    
+    for(int i = 0; i < 3; i++){
+        if(cnt[i] == max){
+            winner.push_back(i+1);
+        }
+    }
+                              
+                    
+    return winner;
 }
